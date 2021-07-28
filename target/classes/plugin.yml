@@ -3,7 +3,7 @@ main: me.zhenri.mito.Main
 version: 1.0
 author: zHenri
 depend: [Citizens, HolographicDisplays]
-softdepend: [LegendChat]
+softdepend: [Legendchat]
 commands:
   setmitonpc:
   setmito:

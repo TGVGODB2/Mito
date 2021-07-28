@@ -3,6 +3,7 @@ Raio: true #Solta um raio quando alguém se torna mito.
 AnunciarMito: true #Anúncia no chat para todos os jogadores quando alguém se torna mito.
 AnunciarEntrada: true #Anúncia no chat quando o mito do pvp entrar no servidor.
 AnunciarSaida: true #Anúncia no chat quando o mito do pvp sair do servidor.
+Tag: "&b[Mito]"
 
 MitoMenu:
   rows: 3

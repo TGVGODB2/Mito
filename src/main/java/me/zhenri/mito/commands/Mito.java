@@ -2,19 +2,10 @@ package me.zhenri.mito.commands;
 
 import me.zhenri.mito.Main;
 import me.zhenri.mito.api.MitoAPI;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Mito implements CommandExecutor {
 
@@ -37,9 +28,9 @@ public class Mito implements CommandExecutor {
                     MitoAPI.reloadPlugin();
                     p.sendMessage("§aReload concluído com sucesso.");
                 }
-            }else {
+            } else {
                 if (args.length == 0) {
-                    s.sendMessage("§c"+MitoAPI.getMitoName()+" é atual Mito do PvP.");
+                    s.sendMessage("§c" + MitoAPI.getMitoName() + " é atual Mito do PvP.");
                     return true;
                 }
                 if (args[0].equalsIgnoreCase("reload")) {

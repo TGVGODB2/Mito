@@ -19,13 +19,13 @@ public class MitoNPC {
 
     public static void spawn() {
         if (CitizensAPI.getNPCRegistry().getById(1000) == null) {
-            NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, UUID.randomUUID(), 1000, "§c"+MitoAPI.getMitoName());
+            NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, UUID.randomUUID(), 1000, "§c" + MitoAPI.getMitoName());
             npc.data().set("player-skin-name", MitoAPI.getMitoName());
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "npc select 1000");
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "npc gravity");
         }
-        if (!CitizensAPI.getNPCRegistry().getById(1000).getName().equals("§b"+MitoAPI.getMitoName())) {
-            CitizensAPI.getNPCRegistry().getById(1000).setName("§b"+MitoAPI.getMitoName());
+        if (!CitizensAPI.getNPCRegistry().getById(1000).getName().equals("§b" + MitoAPI.getMitoName())) {
+            CitizensAPI.getNPCRegistry().getById(1000).setName("§b" + MitoAPI.getMitoName());
         }
         if (!CitizensAPI.getNPCRegistry().getById(1000).data().get("player-skin-name").equals(MitoAPI.getMitoName())) {
             CitizensAPI.getNPCRegistry().getById(1000).data().set("player-skin-name", MitoAPI.getMitoName());
@@ -37,7 +37,7 @@ public class MitoNPC {
             int add = 0;
             for (String line : Main.getInstance().getConfig().getStringList("Hologram")) {
                 if (add > 0) {
-                    addy = addy+0.25;
+                    addy = addy + 0.25;
                 }
                 add++;
             }
@@ -57,13 +57,13 @@ public class MitoNPC {
         String z = String.valueOf(location.getZ());
         String yaw = String.valueOf(location.getYaw());
         String pitch = String.valueOf(location.getPitch());
-        String string = world+";"+x+";"+y+";"+z+";"+yaw+";"+pitch;
+        String string = world + ";" + x + ";" + y + ";" + z + ";" + yaw + ";" + pitch;
         Main.getInstance().getConfig().set("NPC", string);
         Main.getInstance().saveConfig();
         if (check()) {
             remove();
             spawn();
-        }else {
+        } else {
             spawn();
         }
     }
@@ -71,7 +71,7 @@ public class MitoNPC {
     public static boolean check() {
         if (CitizensAPI.getNPCRegistry().getById(1000) != null && CitizensAPI.getNPCRegistry().getById(1000).isSpawned()) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -101,9 +101,9 @@ public class MitoNPC {
     public static void updateNPC() {
         NPC npc = CitizensAPI.getNPCRegistry().getById(1000);
         if (npc != null && getLocation() != null) {
-            if (!npc.getName().equals("§b"+MitoAPI.getMitoName())) {
+            if (!npc.getName().equals("§b" + MitoAPI.getMitoName())) {
                 npc.despawn();
-                npc.setName("§b"+MitoAPI.getMitoName());
+                npc.setName("§b" + MitoAPI.getMitoName());
                 npc.data().set("player-skin-name", MitoAPI.getMitoName());
                 npc.spawn(getLocation());
             }

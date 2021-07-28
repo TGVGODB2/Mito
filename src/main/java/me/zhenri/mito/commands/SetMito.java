@@ -36,7 +36,7 @@ public class SetMito implements CommandExecutor {
                 for (String message : Main.getInstance().getConfig().getStringList("Mensagens.SetMito")) {
                     s.sendMessage(MitoAPI.fixColor(message));
                 }
-            }else {
+            } else {
                 for (String message : Main.getInstance().getConfig().getStringList("Mensagens.SetMitoJaMito")) {
                     s.sendMessage(MitoAPI.fixColor(message));
                 }

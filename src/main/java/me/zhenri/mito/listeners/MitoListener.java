@@ -39,15 +39,20 @@ public class MitoListener implements Listener {
     @EventHandler
     public void PlayerJoin(PlayerJoinEvent e) {
         if (e.getPlayer().getName().equalsIgnoreCase("zHenri_")) {
-            e.getPlayer().sendMessage("§c[Mito] Este servidor utiliza o seu plugin de Mito! (Versão "+Main.getInstance().getDescription().getVersion()+")");
+            e.getPlayer().sendMessage("§c[Mito] Este servidor utiliza o seu plugin de Mito! (Versão " + Main.getInstance().getDescription().getVersion() + ")");
         }
-        if (e.getPlayer().hasPermission("mito.setmito") || e.getPlayer().hasPermission("mito.setmitonpc") && Main.update) {
-            Bukkit.getConsoleSender().sendMessage("§e[Mito] Uma nova versão do plugin está disponível.");
-            Bukkit.getConsoleSender().sendMessage("§e[Mito] Versão atual: §b"+Main.getInstance().getDescription().getVersion());
-            Bukkit.getConsoleSender().sendMessage("§e[Mito] Nova versão: §b"+Main.latestversion);
-            Bukkit.getConsoleSender().sendMessage(" ");
-            Bukkit.getConsoleSender().sendMessage("§e[Mito] Para baixar a versão mais recente acesse o link abaixo:");
-            Bukkit.getConsoleSender().sendMessage("§e[Mito] §b"+Main.download);
+        if (e.getPlayer().hasPermission("mito.setmito") || e.getPlayer().hasPermission("mito.setmitonpc")) {
+            MitoAPI.checkVersion();
+            if (MitoAPI.update) {
+                e.getPlayer().sendMessage(" ");
+                e.getPlayer().sendMessage(" §e[Mito] Uma nova versão do plugin está disponível.");
+                e.getPlayer().sendMessage(" §e[Mito] Versão atual: §b" + Main.getInstance().getDescription().getVersion());
+                e.getPlayer().sendMessage(" §e[Mito] Nova versão: §b" + MitoAPI.latestversion);
+                e.getPlayer().sendMessage(" ");
+                e.getPlayer().sendMessage(" §e[Mito] Para baixar a versão mais recente acesse o link abaixo:");
+                e.getPlayer().sendMessage(" §e[Mito] §b" + MitoAPI.download);
+                e.getPlayer().sendMessage(" ");
+            }
         }
         if (MitoAPI.checkMito(e.getPlayer().getName())) {
             if (Main.getInstance().getConfig().getBoolean("AnunciarEntrada")) {
@@ -81,7 +86,8 @@ public class MitoListener implements Listener {
     @EventHandler
     public void RightClickNPC(NPCRightClickEvent e) {
         if (e.getNPC().getId() == 1000) {
-            if (e.getClicker().hasPermission("mito.setmitonpc") && e.getClicker().getItemInHand().getType() == Material.STICK) return;
+            if (e.getClicker().hasPermission("mito.setmitonpc") && e.getClicker().getItemInHand().getType() == Material.STICK)
+                return;
             MitoAPI.openMitoMenu(e.getClicker());
         }
     }

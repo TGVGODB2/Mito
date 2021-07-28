@@ -10,15 +10,44 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MitoAPI {
 
-    public static void reloadPlugin() {
+    public static boolean update = false;
+    public static String latestversion, download;
 
+    public static void checkVersion() {
+        try {
+            URL url = new URL("https://api.github.com/repos/zHenri-dev/Mito/releases/latest");
+            URLConnection connection = url.openConnection();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String response = reader.lines().collect(Collectors.joining("\n"));
+            JSONObject jsonObject = (JSONObject) new JSONParser().parse(response);
+            latestversion = (String) jsonObject.get("tag_name");
+            download = (String) jsonObject.get("html_url");
+            if (!Main.getInstance().getDescription().getVersion().equals(latestversion)) {
+                update = true;
+            }else if (update) {
+                update = false;
+            }
+        } catch (Exception e) {
+            Bukkit.getConsoleSender().sendMessage("§c[Mito] Ocorreu um erro ao tentar verificar as atualizações.");
+        }
+    }
+
+    public static void reloadPlugin() {
         if (!new File(Main.getInstance().getDataFolder(), "config.yml").exists()) {
             Main.getInstance().saveDefaultConfig();
         }
@@ -46,7 +75,7 @@ public class MitoAPI {
     }
 
     public static void openMitoMenu(Player player) {
-        Inventory inventory = Bukkit.createInventory(null, Main.getInstance().getConfig().getInt("MitoMenu.rows")*9, MitoAPI.fixColor(Main.getInstance().getConfig().getString("MitoMenu.name")));
+        Inventory inventory = Bukkit.createInventory(null, Main.getInstance().getConfig().getInt("MitoMenu.rows") * 9, MitoAPI.fixColor(Main.getInstance().getConfig().getString("MitoMenu.name")));
         ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
         ItemMeta meta = head.getItemMeta();
         meta.setDisplayName(MitoAPI.fixColor(Main.getInstance().getConfig().getString("MitoMenu.item.name")).replace("%mito%", MitoAPI.getMitoName()));
@@ -66,7 +95,7 @@ public class MitoAPI {
     public static boolean checkMito(String player) {
         if (player.equals(getMitoName())) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }

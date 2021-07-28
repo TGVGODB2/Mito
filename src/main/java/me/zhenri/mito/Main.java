@@ -1,8 +1,10 @@
 package me.zhenri.mito;
 
+import me.zhenri.mito.api.MitoAPI;
 import me.zhenri.mito.commands.Mito;
 import me.zhenri.mito.commands.SetMito;
 import me.zhenri.mito.commands.SetMitoNPC;
+import me.zhenri.mito.listeners.LegendChatListener;
 import me.zhenri.mito.listeners.MitoListener;
 import me.zhenri.mito.npcs.MitoNPC;
 import org.bukkit.Bukkit;
@@ -20,12 +22,13 @@ import java.util.stream.Collectors;
 public class Main extends JavaPlugin {
 
     private static Main instance;
+
     public static Main getInstance() {
         return instance;
     }
-    public static boolean update = false;
-    public static String latestversion,download;
 
+    public static boolean legendchat = false;
+    
     @Override
     public void onEnable() {
         instance = this;
@@ -40,26 +43,21 @@ public class Main extends JavaPlugin {
 
         MitoNPC.spawn();
 
-        try {
-            URL url = new URL("https://api.github.com/repos/zHenri-dev/Mito/releases/latest");
-            URLConnection connection = url.openConnection();
+        if (Bukkit.getPluginManager().getPlugin("Legendchat") != null) {
+            legendchat = true;
+            Bukkit.getPluginManager().registerEvents(new LegendChatListener(), this);
+        }
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String response = reader.lines().collect(Collectors.joining("\n"));
-            JSONObject jsonObject = (JSONObject) new JSONParser().parse(response);
-            latestversion = (String) jsonObject.get("tag_name");
-            download = (String) jsonObject.get("html_url");
-            if (!getDescription().getVersion().equals(latestversion)) {
-                update = true;
-                Bukkit.getConsoleSender().sendMessage("§e[Mito] Uma nova versão do plugin está disponível.");
-                Bukkit.getConsoleSender().sendMessage("§e[Mito] Versão atual: §b"+getDescription().getVersion());
-                Bukkit.getConsoleSender().sendMessage("§e[Mito] Nova versão: §b"+latestversion);
-                Bukkit.getConsoleSender().sendMessage(" ");
-                Bukkit.getConsoleSender().sendMessage("§e[Mito] Para baixar a versão mais recente acesse o link abaixo:");
-                Bukkit.getConsoleSender().sendMessage("§e[Mito] §b"+download);
-            }
-        }catch (Exception e) {
-            Bukkit.getConsoleSender().sendMessage("§c[Mito] Ocorreu um erro ao tentar verificar as atualizações.");
+        MitoAPI.checkVersion();
+        if (MitoAPI.update) {
+            Bukkit.getConsoleSender().sendMessage(" ");
+            Bukkit.getConsoleSender().sendMessage(" §e[Mito] Uma nova versão do plugin está disponível.");
+            Bukkit.getConsoleSender().sendMessage(" §e[Mito] Versão atual: §b" + Main.getInstance().getDescription().getVersion());
+            Bukkit.getConsoleSender().sendMessage(" §e[Mito] Nova versão: §b" + MitoAPI.latestversion);
+            Bukkit.getConsoleSender().sendMessage(" ");
+            Bukkit.getConsoleSender().sendMessage(" §e[Mito] Para baixar a versão mais recente acesse o link abaixo:");
+            Bukkit.getConsoleSender().sendMessage(" §e[Mito] §b" + MitoAPI.download);
+            Bukkit.getConsoleSender().sendMessage(" ");
         }
     }
 

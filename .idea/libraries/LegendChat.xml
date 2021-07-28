@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="LegendChat">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../Dependencias/LegendChat.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
