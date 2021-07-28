@@ -1,0 +1,45 @@
+Mito: "Ninguém"
+Raio: true #Solta um raio quando alguém se torna mito.
+AnunciarMito: true #Anúncia no chat para todos os jogadores quando alguém se torna mito.
+AnunciarEntrada: true #Anúncia no chat quando o mito do pvp entrar no servidor.
+AnunciarSaida: true #Anúncia no chat quando o mito do pvp sair do servidor.
+
+MitoMenu:
+  rows: 3
+  name: "&eMito do PvP"
+  item:
+    slot: 13
+    name: "&eMito do PvP"
+    lore:
+      - "&7O atual &eMito &7do &ePvP &7é o &b%mito%&7."
+
+NPC: null #Não mexer aqui, para definir a localização do NPC utilize /setmitonpc.
+Hologram:
+  - "&e&lMITO DO PVP"
+  - "&bAtual Mito do PvP"
+
+Mensagens:
+  SemPermissao:
+    - "&cVocê não possui permissão para executar este comando."
+  SetMitoNPC:
+    - "&eLocalização do NPC definida com sucesso!"
+  SetMitoUsage:
+    - "&cUtilize: /setmito (jogador)"
+  OfflinePlayer:
+    - "&cJogador offline ou não encontrado."
+  SetMito:
+    - "&eMito definido com sucesso!"
+  SetMitoJaMito:
+    - "&cO jogador especificado já é o Mito do PvP."
+  NovoMito:
+    - " "
+    - " &e[Mito] &b%mito% &eé o novo Mito do PvP."
+    - " "
+  AnuncioEntrada:
+    - " "
+    - " &e[Mito] O Mito do PvP &b%mito% &eentrou no servidor."
+    - " "
+  AnuncioSaida:
+    - " "
+    - " &e[Mito] O Mito do PvP &b%mito% &esaiu do servidor."
+    - " "

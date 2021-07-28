@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Mito">
+    <output-path>$PROJECT_DIR$/../../../Servidor/RankUP/plugins</output-path>
+    <root id="archive" name="Mito.jar">
+      <element id="module-output" name="Mito" />
+    </root>
+  </artifact>
+</component>
