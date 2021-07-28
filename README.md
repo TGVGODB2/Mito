@@ -1,6 +1,6 @@
 # Mito
 
-Um sistema simples de Mito do PvP, o plugin é 100% configurável, possui sistema de NPC e menu GUI, também possui uma [API](https://github.com/zHenri-dev/Mito/blob/main/src/main/java/me/zhenri/mito/api/MitoAPI.java) para desenvolvedores.
+Um sistema simples de Mito do PvP open source, o plugin é 100% configurável, possui sistema de NPC e menu GUI, também possui uma [API](https://github.com/zHenri-dev/Mito/blob/main/src/main/java/me/zhenri/mito/api/MitoAPI.java) para desenvolvedores.
 
 ## Comandos
 |Comando             |Permissão          |
